@@ -1,0 +1,68 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"python/3.9.21"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore_cache load "python/3.9.21"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+/umbc/rs/rajangul/users/rohithm4/TNCL/helper_functions.py:206: RuntimeWarning: invalid value encountered in scalar divide
+  MCC = ((tp*tn)-(fp*fn))/np.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
+/umbc/rs/rajangul/users/rohithm4/TNCL/helper_functions.py:206: RuntimeWarning: invalid value encountered in scalar divide
+  MCC = ((tp*tn)-(fp*fn))/np.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
+/umbc/rs/rajangul/users/rohithm4/TNCL/helper_functions.py:206: RuntimeWarning: invalid value encountered in scalar divide
+  MCC = ((tp*tn)-(fp*fn))/np.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
+/umbc/rs/rajangul/users/rohithm4/TNCL/helper_functions.py:206: RuntimeWarning: invalid value encountered in scalar divide
+  MCC = ((tp*tn)-(fp*fn))/np.sqrt((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)

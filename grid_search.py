@@ -1,23 +1,35 @@
 from contextlib import redirect_stdout
 import csv
 import itertools
-
+import numpy as np
+import random
 from models import Solver, SolverArgs
 
 
 def grid_search():
+    np.random.seed(42)
+    random.seed(42)
     p_values = [25, 50, 75, 100]
     lambda_grid = [0.01, 0.05, 0.1, 0.2]
-    rho_grid = [0.5, 1.0, 2.0]
+    rho_grid = [0.1, 0.5, 1.0, 2.0]
 
     results = []
+    output_file = 'grid_search_results.csv'
+    is_first = True  # Write header only once
 
     for p in p_values:
         best_loss = float('inf')
         best_params = None
 
-        for lamb, rho in itertools.product(lambda_grid, rho_grid):
-            args = SolverArgs(p=p, lambda_param=lamb, rho=rho, num_rep=10, n_samples=2000)
+        for idx, (lamb, rho) in enumerate(itertools.product(lambda_grid, rho_grid)):
+
+            args = SolverArgs(
+                p=p,
+                lambda_param=lamb,
+                rho=rho,
+                num_rep=10,
+                n_samples=2000
+            )
             solver = Solver(args)
             data = solver.solve()
             metrics = solver.evaluate(data)
@@ -30,7 +42,14 @@ def grid_search():
                 'n_samples': args.n_samples,
                 **metrics
             }
-            results.append(result_row)
+
+            # Append to CSV immediately for fault tolerance
+            with open(output_file, mode='a', newline='') as file:
+                writer = csv.DictWriter(file, fieldnames=result_row.keys())
+                if is_first:
+                    writer.writeheader()
+                    is_first = False
+                writer.writerow(result_row)
 
             if metrics['avg_kll'] < best_loss:
                 best_loss = metrics['avg_kll']
@@ -38,14 +57,7 @@ def grid_search():
 
         print(f"Best for p={p}:", best_params)
 
-    # Save to CSV
-    with open('grid_search_results.csv', mode='w', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=results[0].keys())
-        writer.writeheader()
-        writer.writerows(results)
-
-    print("Results saved to 'grid_search_results.csv'")
-
+    print("Grid search completed. Results saved to:", output_file)
 
 if __name__ == "__main__":
     with open("grid_search_logs.txt", "w") as f:

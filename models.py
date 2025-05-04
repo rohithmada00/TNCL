@@ -2,7 +2,6 @@ from time import time
 
 import numpy as np
 from sklearn.metrics import confusion_matrix, f1_score
-from numpy.ma.extras import average
 from helper_functions import ADMM_newton, B_mat_symmetric, binarize_matrix, compute_recovery_rate_numpy, cov_x, cov_y, create_sparse_vec_pos_def_2, f1, generate_y, kll, make_T_matrices, norm_loss, rkll, rte, samp_cov, scores, threshold
 
 class SolverArgs:
@@ -25,7 +24,7 @@ class Solver:
     def __init__(self, args: SolverArgs):
         self.args = args
 
-    def solve(self,epsilon=1e-4,alpha=0.1,beta=0.7,):
+    def solve(self,epsilon=1e-4,alpha=0.01, beta=0.5):
         p = self.args.p
         d = self.args.d
         const = self.args.const
@@ -100,7 +99,7 @@ class Solver:
 
         return data
     
-    def evaluate(self, data):
+    def evaluate(self, data, return_raw=False):
         num_rep = self.args.num_rep
         keys = list(data[0].keys())
         threshold_range = 0.01 * np.arange(101)
@@ -141,7 +140,6 @@ class Solver:
 
             idx = np.argmax(np.array(thr_acc))
             best_thr.append(threshold_range[idx])
-            print(f"Best threshold: {best_thr}")
             best_rate.append(thr_rate[idx])
             best_acc.append(thr_acc[idx])
             best_f1.append(thr_f1[idx])
@@ -156,18 +154,28 @@ class Solver:
             norm_const.append(norm_loss(a, a_thr, sigma_x))
             scores_const.append(scores(a, a1, threshold_value=threshold_range[idx]))
 
-        metrics = {
-            'avg_acc': np.average(best_acc),
-            'avg_f1': average(best_f1),
-            'avg_rate': average(best_rate),
-            'avg_kll': average(kll_const),
-            'avg_rkll': average(rkll_const),
-            'avg_rte': average(rte_const),
-            'avg_fro': average([n[0] for n in norm_const]),
-            'avg_spec': average([n[1] for n in norm_const]),
-            'avg_l1': average([n[2] for n in norm_const]),
-            'best_thr': best_thr,
-            'best_cm': best_cm,
+        # Aggregate metrics
+        raw_metrics = {
+            'acc': best_acc,
+            'f1': best_f1,
+            'rate': best_rate,
+            'kll': kll_const,
+            'rkll': rkll_const,
+            'rte': rte_const,
+            'fro': [n[0] for n in norm_const],
+            'spec': [n[1] for n in norm_const],
+            'l1': [n[2] for n in norm_const],
         }
 
-        return metrics
+        mean_metrics = {f'avg_{k}': np.average(v) for k, v in raw_metrics.items()}
+        std_metrics = {f'std_{k}': np.std(v) for k, v in raw_metrics.items()}
+
+        # Combine
+        metrics = {**mean_metrics, **std_metrics}
+        metrics['best_thr'] = best_thr
+        metrics['best_cm'] = best_cm
+
+        if return_raw:
+            return raw_metrics, metrics
+        else:
+            return metrics

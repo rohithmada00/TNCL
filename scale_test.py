@@ -1,15 +1,20 @@
 import pandas as pd
 from contextlib import redirect_stdout
 from models import Solver, SolverArgs
+import numpy as np
+import random
 
 def scale_test():
+    np.random.seed(42)
+    random.seed(42)
     p_list = [25, 50, 75, 100]
     tau_list = [0.01, 0.1, 1, 5, 25, 50, 100]
     d_fixed = 15
-    lambda_val = 0.1
+    lambda_val = 0.01
     rho_val = 0.1
 
-    results = []
+    output_file = 'scale_test.csv'
+    is_first = True  # For writing header only once
 
     for p in p_list:
         for tau in tau_list:
@@ -18,20 +23,17 @@ def scale_test():
             data = solver.solve()
             metrics = solver.evaluate(data)
 
-            # Flatten and tag each metric row
             row = {'p': p, 'tau': tau}
             row.update(metrics)
-            results.append(row)
+            df_row = pd.DataFrame([row])
 
-    # Convert to DataFrame and export
-    df = pd.DataFrame(results)
-    df.to_csv('scale_test.csv', index=False)
-    print("Scale test is complete and results are saved to scale_test.csv")
+            df_row.to_csv(output_file, mode='a', header=is_first, index=False)
+            is_first = False
 
+    print("Scale test is complete and results are saved incrementally to scale_test.csv")
 
 
 if __name__ == "__main__":
     with open("scale_test.txt", "w") as f:
         with redirect_stdout(f):
             scale_test()
-

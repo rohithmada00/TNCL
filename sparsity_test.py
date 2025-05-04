@@ -1,11 +1,15 @@
 from contextlib import redirect_stdout
 from models import Solver, SolverArgs
 import pandas as pd
+import numpy as np
+import random
 
 def sparsity_test():
-    p_list = [25]
+    np.random.seed(42)
+    random.seed(42)
+    p_list = [25, 50, 75, 100]
     d_list = [0.2, 0.4, 0.6, 0.8]
-    lambda_val = 0.2
+    lambda_val = 0.01
     rho_val = 0.1
 
     results = []

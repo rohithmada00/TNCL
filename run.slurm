@@ -16,7 +16,7 @@
 #------------------------------------------
 # Load Python module or Anaconda
 #------------------------------------------
-module load python/3.9  # adjust version as needed
+module load python/3.9.21  # adjust version as needed
 
 #------------------------------------------
 # Set up virtual environment
@@ -32,7 +32,7 @@ source venv/bin/activate
 #------------------------------------------
 echo "Installing Python dependencies..."
 pip install --upgrade pip
-pip install numpy pandas scikit-learn matplotlib seaborn tqdm
+pip install numpy pandas scikit-learn matplotlib 
 
 #------------------------------------------
 # Run your Python script
