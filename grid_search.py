@@ -13,7 +13,6 @@ def grid_search():
     lambda_grid = [0.01, 0.05, 0.1, 0.2]
     rho_grid = [0.1, 0.5, 1.0, 2.0]
 
-    results = []
     output_file = 'grid_search_results.csv'
     is_first = True  # Write header only once
 
