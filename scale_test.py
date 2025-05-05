@@ -10,10 +10,10 @@ def scale_test():
     p_list = [25, 50, 75, 100]
     tau_list = [0.01, 0.1, 1, 5, 25, 50, 100]
     d_fixed = 15
-    lambda_val = 0.01
+    lambda_val = 0.001
     rho_val = 0.1
 
-    output_file = 'scale_test.csv'
+    output_file = 'scale_test_rho_same.csv'
     is_first = True  # For writing header only once
 
     for p in p_list:

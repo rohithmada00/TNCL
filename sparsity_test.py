@@ -9,7 +9,7 @@ def sparsity_test():
     random.seed(42)
     p_list = [25, 50, 75, 100]
     d_list = [0.2, 0.4, 0.6, 0.8]
-    lambda_val = 0.01
+    lambda_val = 0.001
     rho_val = 0.1
 
     results = []
@@ -28,7 +28,7 @@ def sparsity_test():
 
     # Convert to DataFrame and save as CSV
     df = pd.DataFrame(results)
-    df.to_csv('sparsity_test.csv', index=False)
+    df.to_csv('sparsity_test_rho_same.csv', index=False)
     print("Sparsity test is complete and results are saved to sparsity_test.csv")
 
 
