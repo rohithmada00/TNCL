@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-csv_file = 'results\sparity_test\sparsity_test.csv'
+csv_file = 'results/unregularized/sparsity_test/sparsity_test_rho_same.csv'
 
 output_file = 'f1_vs_sparsity_all_p.png'
 

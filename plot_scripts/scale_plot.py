@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-csv_file = 'results/scale_test/scale_test.csv'  
+csv_file = 'results/unregularized/scale_test/scale_test_rho_same.csv'  
 output_file = 'f1_vs_tau_all_p.png'
 
 df = pd.read_csv(csv_file)
