@@ -13,12 +13,12 @@ def scale_test():
     lambda_val = 0.001
     rho_val = 0.1
 
-    output_file = 'scale_test_rho_same.csv'
+    output_file = 'scale_test_d_percent.csv'
     is_first = True  # For writing header only once
 
     for p in p_list:
         for tau in tau_list:
-            args = SolverArgs(p=p, d=d_fixed, const=tau, lambda_param=lambda_val, rho=rho_val, num_rep=10)
+            args = SolverArgs(p=p, d=p*0.8, const=tau, lambda_param=lambda_val, rho=rho_val, num_rep=10)
             solver = Solver(args)
             data = solver.solve()
             metrics = solver.evaluate(data)

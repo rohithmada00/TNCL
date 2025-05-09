@@ -5,8 +5,8 @@ from sklearn.metrics import confusion_matrix, f1_score
 from helper_functions import ADMM_newton, B_mat_symmetric, binarize_matrix, compute_recovery_rate_numpy, cov_x, cov_y, create_sparse_vec_pos_def_2, f1, generate_y, kll, make_T_matrices, norm_loss, rkll, rte, samp_cov, scores, threshold
 
 class SolverArgs:
-    def __init__(self, p=50, d=15, const=5, rho=1, lambda_param=0.01, iterations=50,
-                 regularize=True, backtrack=True, project=True, perturb=False, num_rep=50, n_samples=None):
+    def __init__(self, p=50, d=15, const=5, rho=1, lambda_param=1e-4, iterations=50,
+                 regularize=False, backtrack=True, project=True, perturb=False, num_rep=50, n_samples=None):
         self.p = p
         self.d = d
         self.const = const
