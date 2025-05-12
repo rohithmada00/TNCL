@@ -9,7 +9,7 @@ def sparsity_test():
     random.seed(42)
     p_list = [25, 50, 75, 100]
     d_list = [0.2, 0.4, 0.6, 0.8]
-    lambda_val = 0.001
+    lambda_val = 0.01
     rho_val = 0.1
 
     results = []

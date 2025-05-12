@@ -13,7 +13,7 @@ def grid_search():
     lambda_grid = [0.01, 0.05, 0.1, 0.2]
     rho_grid = [0.1, 0.5, 1.0, 2.0]
 
-    output_file = 'grid_search_reg_results.csv'
+    output_file = 'grid_search_1037_results.csv'
     is_first = True  # Write header only once
 
     for p in p_values:
@@ -27,7 +27,7 @@ def grid_search():
                 lambda_param=lamb,
                 rho=rho,
                 num_rep=10,
-                n_samples=2000
+                n_samples=1037
             )
             solver = Solver(args)
             data = solver.solve()
