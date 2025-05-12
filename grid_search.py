@@ -13,7 +13,7 @@ def grid_search():
     lambda_grid = [0.01, 0.05, 0.1, 0.2]
     rho_grid = [0.1, 0.5, 1.0, 2.0]
 
-    output_file = 'grid_search_results.csv'
+    output_file = 'grid_search_reg_results.csv'
     is_first = True  # Write header only once
 
     for p in p_values:
@@ -59,6 +59,6 @@ def grid_search():
     print("Grid search completed. Results saved to:", output_file)
 
 if __name__ == "__main__":
-    with open("grid_search_logs.txt", "w") as f:
+    with open("grid_search_reg_logs.txt", "w") as f:
         with redirect_stdout(f):
             grid_search()

@@ -1,0 +1,9 @@
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/umbc/rs/rajangul/users/rohithm4/TNCL/venv/lib64/python3.9/site-packages/numpy/linalg/_linalg.py:2371: RuntimeWarning: overflow encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/cm/local/apps/slurm/var/spool/job69180/slurm_script: line 41: 363142 Killed                  python scale_test.py
