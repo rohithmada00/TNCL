@@ -18,7 +18,7 @@ def scale_test():
 
     for p in p_list:
         for tau in tau_list:
-            args = SolverArgs(p=p, d=p*0.8, const=tau, lambda_param=lambda_val, rho=rho_val, num_rep=10)
+            args = SolverArgs(p=p, d=int(p*0.8), const=tau, lambda_param=lambda_val, rho=rho_val, num_rep=10)
             solver = Solver(args)
             data = solver.solve()
             metrics = solver.evaluate(data)

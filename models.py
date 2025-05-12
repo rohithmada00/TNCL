@@ -6,7 +6,7 @@ from helper_functions import ADMM_newton, B_mat_symmetric, binarize_matrix, comp
 
 class SolverArgs:
     def __init__(self, p=50, d=15, const=5, rho=1, lambda_param=1e-4, iterations=50,
-                 regularize=False, backtrack=True, project=True, perturb=False, num_rep=50, n_samples=None):
+                 regularize=True, backtrack=True, project=True, perturb=False, num_rep=50, n_samples=None):
         self.p = p
         self.d = d
         self.const = const
@@ -47,6 +47,7 @@ class Solver:
         print('Dimensions of Matrix = ', p, 'Sparsity = ', d)
         for rep in range(num_rep):
             a = create_sparse_vec_pos_def_2(p, d, diag=d * 10)
+            a/=a[0]
             B0 = B_mat_symmetric(a, p)
             # B0_inv = np.linalg.inv(B0)
             sigma_x = cov_x(p)
