@@ -28,12 +28,12 @@ def sparsity_test():
 
     # Convert to DataFrame and save as CSV
     df = pd.DataFrame(results)
-    df.to_csv('sparsity_test_rho_same.csv', index=False)
+    df.to_csv('sparsity_test_d_varying.csv', index=False)
     print("Sparsity test is complete and results are saved to sparsity_test.csv")
 
 
 
 if __name__ == "__main__":
-    with open("sparsity_test.txt", "w") as f:
+    with open("sparsity_test_d_varying.txt", "w") as f:
         with redirect_stdout(f):
             sparsity_test()

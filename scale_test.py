@@ -8,18 +8,20 @@ def scale_test():
     np.random.seed(42)
     random.seed(42)
     p_list = [25, 50, 75, 100]
-    tau_list = [0.01, 0.1, 1, 5, 25, 50, 100]
+    tau_list = [0.1, 1, 5, 25, 50, 100]
     d_fixed = 15
-    lambda_val = 0.01
-    rho_val = 0.1
+    d_percent = 0.2
+    lambda_val = 0.1
+    rho_val = 1
 
-    output_file = 'scale_test_d_fixed.csv'
+    output_file = 'scale_test_d_varying.csv'
     is_first = True  # For writing header only once
 
     for p in p_list:
+        args = SolverArgs(p=p, d=int(d_percent*p), lambda_param=lambda_val, rho=rho_val, num_rep=10)
+        solver = Solver(args)
         for tau in tau_list:
-            args = SolverArgs(p=p, d=d_fixed, const=tau, lambda_param=lambda_val, rho=rho_val, num_rep=10)
-            solver = Solver(args)
+            solver.args.const=tau
             data = solver.solve()
             metrics = solver.evaluate(data)
 
@@ -34,6 +36,6 @@ def scale_test():
 
 
 if __name__ == "__main__":
-    with open("scale_test.txt", "w") as f:
+    with open("scale_test_d_varying.txt", "w") as f:
         with redirect_stdout(f):
             scale_test()

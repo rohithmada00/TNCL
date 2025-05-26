@@ -13,23 +13,23 @@ def grid_search():
     lambda_grid = [0.01, 0.05, 0.1, 0.2]
     rho_grid = [0.1, 0.5, 1.0, 2.0]
 
-    output_file = 'grid_search_1037_results.csv'
-    is_first = True  # Write header only once
+    output_file = 'grid_search_results_varying_d.csv'
+    is_first = True  
 
     for p in p_values:
+        args = SolverArgs(
+            p=p,
+            num_rep=10,
+            d = int(0.3*p),
+            n_samples=2000
+        )
+        solver = Solver(args)
         best_loss = float('inf')
         best_params = None
 
         for idx, (lamb, rho) in enumerate(itertools.product(lambda_grid, rho_grid)):
-
-            args = SolverArgs(
-                p=p,
-                lambda_param=lamb,
-                rho=rho,
-                num_rep=10,
-                n_samples=1037
-            )
-            solver = Solver(args)
+            solver.args.lambda_param = lamb
+            solver.args.rho = rho
             data = solver.solve()
             metrics = solver.evaluate(data)
 
@@ -59,6 +59,6 @@ def grid_search():
     print("Grid search completed. Results saved to:", output_file)
 
 if __name__ == "__main__":
-    with open("grid_search_reg_logs.txt", "w") as f:
+    with open("grid_search_reg_logs_varying_d.txt", "w") as f:
         with redirect_stdout(f):
             grid_search()

@@ -23,6 +23,17 @@ class SolverArgs:
 class Solver:
     def __init__(self, args: SolverArgs):
         self.args = args
+        self.p = self.args.p
+        self.d = self.args.d
+        self._generate_network() 
+
+    def _generate_network(self):
+        """Generates the network structure (a, B0, sigma_x, sigma_y)."""
+        self.a = create_sparse_vec_pos_def_2(self.p, self.d, diag=self.d * 10)
+        self.a /= self.a[0]
+        self.B0 = B_mat_symmetric(self.a, self.p)
+        self.sigma_x = cov_x(self.p)
+        self.sigma_y = cov_y(self.sigma_x, self.B0)
 
     def solve(self,epsilon=1e-4,alpha=0.01, beta=0.5):
         p = self.args.p
@@ -39,20 +50,15 @@ class Solver:
         n_samples = self.args.n_samples
 
         if n_samples is None:
-            n_samples = int(const * (d * d * np.log(p))) 
+            print(f"N samples in none so using const: {const}")
+            n_samples = int(const * (d * d * np.log(p)))+1 # atleast one sample remains
         print("Number of samples N:", n_samples)
         data = {}
         T_list=make_T_matrices(p, symmetric=True)
 
         print('Dimensions of Matrix = ', p, 'Sparsity = ', d)
         for rep in range(num_rep):
-            a = create_sparse_vec_pos_def_2(p, d, diag=d * 10)
-            a/=a[0]
-            B0 = B_mat_symmetric(a, p)
-            # B0_inv = np.linalg.inv(B0)
-            sigma_x = cov_x(p)
-            sigma_y = cov_y(sigma_x, B0)
-            y_samp = generate_y(np.zeros((p,)), sigma_y, n_samples)
+            y_samp = generate_y(np.zeros((p,)), self.sigma_y, n_samples)
             S = samp_cov(y_samp)
 
             total_t1 = time()
@@ -63,8 +69,8 @@ class Solver:
                 rho,
                 lambda_param,
                 S,
-                sigma_x,
-                a,
+                self.sigma_x,
+                self.a,
                 T_list,
                 epsilon=epsilon,
                 alpha=alpha,
@@ -85,7 +91,7 @@ class Solver:
                 'lambda': lambda_param,
                 'rho': rho,
                 'iterations': iterations,
-                'a': a,
+                'a': self.a,
                 'samp_y': y_samp,
                 'f_reg': regularize,
                 'f_back': backtrack,
@@ -94,7 +100,7 @@ class Solver:
                 'a1': a1,
                 'a2': a2,
                 'mu1': mu1,
-                'sigma_x': sigma_x
+                'sigma_x': self.sigma_x
             }
             data[rep] = run_data
 

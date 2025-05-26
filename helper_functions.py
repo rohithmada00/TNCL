@@ -49,7 +49,8 @@ def cov_y(sigma_x, B):
 
 def generate_y(mean_y, sigma_y, n_samples):
     """ Generate samples of Y"""
-    y_samples = multivariate_normal.rvs(mean=mean_y, cov=sigma_y, size=n_samples)
+    y_samples = multivariate_normal.rvs(mean=mean_y, cov=sigma_y, size=n_samples, random_state= 42)
+    print('y_sample_0', y_samples[0])
     return y_samples
 
 def samp_cov(y_samples):
@@ -246,7 +247,8 @@ def compute_newton_step(gradient, hessian):
     lambd (float): Newton decrement.
     """
     delta_x_nt = -np.linalg.solve(hessian, gradient)  # Newton step
-    lambd_sqr = np.dot(gradient.T, hessian@gradient)  # Newton decrement
+    # lambd_sqr = np.dot(gradient.T, hessian@gradient)  # Newton decrement
+    lambd_sqr = -np.dot(gradient.T, delta_x_nt)
     return delta_x_nt, lambd_sqr
 
 def backtracking_line_search(f, gradient, x, delta_x_nt, S, sigma_x, rho, a2, mu1,
