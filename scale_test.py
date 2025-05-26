@@ -1,37 +1,43 @@
 import pandas as pd
 from contextlib import redirect_stdout
-from models import Solver, SolverArgs
+from helper_functions import Solver, SolverArgs, evaluate, save_to_pickle
 import numpy as np
 import random
 
 def scale_test():
-    np.random.seed(42)
-    random.seed(42)
-    p_list = [25, 50, 75, 100]
-    tau_list = [0.1, 1, 5, 25, 50, 100]
-    d_fixed = 15
-    d_percent = 0.2
+    p_list = [25, 30]
+    tau = [0.1, 1, 5, 10, 25, 50, 100]
+    d_fixed = 7
     lambda_val = 0.1
-    rho_val = 1
+    rho_val = 0.1
 
-    output_file = 'scale_test_d_varying.csv'
-    is_first = True  # For writing header only once
+    f1_results_ratio = {p: [] for p in p_list}
+    data_list = {p: [] for p in p_list}
 
     for p in p_list:
-        args = SolverArgs(p=p, d=int(d_percent*p), lambda_param=lambda_val, rho=rho_val, num_rep=10)
+        args = SolverArgs(p=p, d=d_fixed, lambda_param=lambda_val, rho=rho_val, num_rep=3, iterations=100)
         solver = Solver(args)
-        for tau in tau_list:
-            solver.args.const=tau
+        for t in tau:
+            solver.args.const = t
             data = solver.solve()
-            metrics = solver.evaluate(data)
+            metrics = evaluate(data)
+            data_list[p].append(data)
+            f1_results_ratio[p].append(metrics['avg_f1'])
 
-            row = {'p': p, 'tau': tau}
-            row.update(metrics)
-            df_row = pd.DataFrame([row])
+    # plt.figure(figsize=(10, 6))
+    # for p in p_list:
+    #     plt.plot(tau, f1_results_ratio[p], marker='o', label=f'p={p}')
 
-            df_row.to_csv(output_file, mode='a', header=is_first, index=False)
-            is_first = False
-
+    # plt.xlabel(r"$\tau = N/(d^2 \log p)$")
+    # plt.ylabel('Average F1 Score')
+    # plt.title(r'F1 Score vs $\tau$')
+    # plt.legend()
+    # plt.grid(True)
+    # plt.tight_layout()
+    # plt.show()
+    save_to_pickle(data_list, 'scale_data_list.pkl')
+    save_to_pickle(f1_results_ratio, 'scale_f1_results.pkl')
+    
     print("Scale test is complete and results are saved incrementally to scale_test.csv")
 
 

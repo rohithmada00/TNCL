@@ -12,6 +12,8 @@
 #SBATCH --account=pi_rajangul
 #SBATCH --qos=medium
 #SBATCH --partition=general
+#SBATCH --mail-type=ALL 
+#SBATCH --mail-user="rohithm4@umbc.edu"
 
 #------------------------------------------
 # Load Python module or Anaconda
